@@ -12,13 +12,22 @@ def random_key(size):
     return randint(rmin, rmax)*2+1
 
 """2048 bit encryption == keys of 617 digits length"""
-def key_length(): return 617
+def key_length(bits):
+    if bits < 512:
+        raise ValueError("Key size too small")
+    elif bits == 512:
+        return 155
+    elif bits == 1024:
+        return 309
+    elif bits == 2048:
+        return 617
+    return 617
 
 """Generates public key"""
-def public_key(): return random_key(key_space())
+def public_key(): return random_key(key_length())
 
 """Generates private key"""
-def private_key(): return random_key(key_space())
+def private_key(): return random_key(key_length())
 
 def egcd(p, q):
     """Finding the greatest common divisor of p and q"""
