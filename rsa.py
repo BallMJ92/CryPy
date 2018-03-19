@@ -50,3 +50,20 @@ def encryption_key(p, q):
     """Applying modular inverse function to generate encryption
 key based on extended euclidean algorithm"""
     return modular_inverse(p, q) 
+
+def validateDecryptionKey(p, q, e, d):
+    """Checks if decryption key is valid for keys p and q, and encryption key e"""
+    f = (p-1)*(q-1)
+    k = e*d
+
+    while k>=0:
+        k = k-f
+        if k == f+1 or k== f-1:
+            print("Decryption Key: %d is valid\n" % (d))
+            print("Valid key values -\nP: %d\nQ: %d\nEncryption Key: %d\nDecryption Key: %d\n" % (p, q, e, d))
+            return None
+
+"""Using validateDecryptionKey function to find all valid decryption keys
+within specified range"""
+for i in range(1, 1000):
+    validateDecryptionKey(77, 31, 7, i)
